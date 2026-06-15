@@ -76,25 +76,6 @@ El análisis visual mostró que:
 
 ---
 
-# Estructura del Proyecto
-
-```text
-verificacion-facial-synth2real/
-│
-├── app.py
-├── requirements.txt
-├── models/
-├── datasets/
-├── notebooks/
-├── training/
-├── evaluation/
-├── gradcam/
-├── assets/
-└── README.md
-```
-
----
-
 
 # Autor
 
