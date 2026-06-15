@@ -1,43 +1,37 @@
----
-title: TFG Biometría
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_port: 8501
-tags:
-- streamlit
-- biometrics
-- deep-learning
-- computer-vision
-- lora
-pinned: false
-short_description: Demo interactiva para ver el mapa de calor con grad-cam
----
+#  Verificación Facial Preservando la Privacidad (Synth2Real)
 
-# Reconocimiento Biométrico y Brecha de Dominio (Demo)
+Este repositorio contiene el código, los experimentos y la demostración interactiva del Trabajo de Fin de Grado (TFG) en Ingeniería Informática desarrollado en la **Universidad de Alicante** por **Enrique López Aroca**[cite: 2].
 
- **Acceso a la aplicación a pantalla completa:** [https://enrique2023-tfg-biometria-gradcam.hf.space](https://enrique2023-tfg-biometria-gradcam.hf.space)
-
-Esta aplicación web es una demostración interactiva desarrollada como complemento práctico al Trabajo de Fin de Grado del doble grado en Ingeniería Informática y ADE de la Universidad de Alicante.
-
-##  ¿Qué hace esta aplicación?
-Esta interfaz ha sido diseñada para tangibilizar los resultados de la investigación. Permite calcular y visualizar la similitud entre imágenes biométricas, sirviendo como prueba empírica para observar cómo se comportan los modelos fundacionales frente al cambio de dominio (escenarios *Synth2Real*, pasando de datos sintéticos a reales).
-
-##  Tecnologías y Modelos
-* **Frontend:** Construido con [Streamlit](https://streamlit.io/) para una interacción fluida y en tiempo real.
-* **Modelos Subyacentes:** Arquitecturas basadas en atención (*Vision Transformers*, CLIP), evaluando el impacto del ajuste paramétrico eficiente (LoRA) para superar el *domain gap*.
-* **Despliegue:** Contenerizado mediante Docker para asegurar su reproducibilidad.
-
+El proyecto aborda el reto de construir sistemas de reconocimiento facial utilizando exclusivamente **datos sintéticos**. Este enfoque preserva la privacidad del usuario y mitiga sesgos demográficos, enfrentándose al desafío técnico de la brecha de dominio (*Domain Gap*) al trasladar el modelo a entornos reales[cite: 2].
 
 ---
 
-##  Ejecución en local (Para desarrolladores)
+##  Características Principales
 
-Si deseas inspeccionar el código o ejecutar esta demostración en tu propia máquina:
+*   **Entrenamiento 100% Sintético:** Uso de los conjuntos de datos *DigiFace* (renderizado 3D) e *IDiffFace-U* (IA generativa/difusión) para el entrenamiento[cite: 2].
+*   **Adaptación Eficiente (PEFT):** Implementación de **LoRA** (*Low-Rank Adaptation*) para afinar modelos masivos congelando su conocimiento previo y entrenando solo un **~1%** de los parámetros[cite: 2].
+*   **Modelos Fundacionales:** Evaluación comparativa del rendimiento *Zero-Shot* y adaptado de arquitecturas basadas en autoatención: **CLIP ViT-L/14** y **DINOv2 ViT-L/14**[cite: 2].
+*   **Interpretabilidad (XAI):** Generación de mapas de activación visual **Grad-CAM** y análisis del espacio latente mediante **PCA** para explicar la toma de decisiones del modelo[cite: 2].
 
-1. Clona este repositorio.
-2. Instala las dependencias necesarias.
-3. Ejecuta el servidor local de Streamlit apuntando al script principal:
+---
 
+##  Demo Interactiva con Streamlit
+
+El proyecto incluye una aplicación web interactiva desarrollada con **Streamlit** para probar el rendimiento de los modelos en tiempo real.
+
+### ¿Qué permite la demo?
+1.  **Cargar imágenes:** Sube dos fotografías faciales desde tu equipo.
+2.  **Selección de Modelo:** Alterna entre las distintas arquitecturas (CLIP Base, CLIP + LoRA, DINOv2, ResNet-50) para comparar su comportamiento.
+3.  **Verificación 1:1:** Calcula al instante la similitud coseno entre los *embeddings* extraídos e indica si pertenecen a la misma identidad basándose en el umbral óptimo calculado.
+4.  **Explicabilidad en vivo:** Genera mapas de calor (Grad-CAM) sobre las imágenes subidas para auditar visualmente en qué áreas anatómicas se está centrando la red neuronal.
+
+---
+
+## ⚙️ Instalación y Configuración
+
+Sigue estos pasos para clonar el repositorio y ejecutar tanto los entrenamientos como la demo localmente.
+
+### 1. Clonar el repositorio
 ```bash
-streamlit run src/streamlit_app.py
+git clone [https://github.com/TU_USUARIO/verificacion-facial-synth2real.git](https://github.com/TU_USUARIO/verificacion-facial-synth2real.git)
+cd verificacion-facial-synth2real
